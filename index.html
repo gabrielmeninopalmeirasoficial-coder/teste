@@ -3223,4 +3223,21 @@ const submitValueBtn=document.getElementById("submitValueBtn");if(submitValueBtn
     
 
 <script src="pix-checkout.js"></script>
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const tracking = {
+      utm_source: params.get('utm_source'),
+      utm_medium: params.get('utm_medium'),
+      utm_campaign: params.get('utm_campaign'),
+      utm_content: params.get('utm_content'),
+      utm_term: params.get('utm_term'),
+      src: params.get('src'),
+      sck: params.get('sck') || params.get('ttclid'),
+      client_user_agent: navigator.userAgent
+    };
+    sessionStorage.setItem('tracking', JSON.stringify(tracking));
+  })();
+</script>
+    
 </body></html>
