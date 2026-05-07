@@ -4,7 +4,7 @@
     + '<div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:360px;width:94%;text-align:center;position:relative;font-family:Lato,sans-serif;">'
     + '<button onclick="ggpixFecharModal()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">×</button>'
     + '<div style="margin-bottom:16px;">'
-    + '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(36,202,104,0.1);border:1px solid rgba(36,202,104,0.3);border-radius:100px;padding:4px 12px;font-size:11px;color:#24CA68;font-weight:700;margin-bottom:10px;"><span style="width:6px;height:6px;background:#24CA68;border-radius:50%;"></span> Vizzion Pay</div>'
+    + '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(36,202,104,0.1);border:1px solid rgba(36,202,104,0.3);border-radius:100px;padding:4px 12px;font-size:11px;color:#24CA68;font-weight:700;margin-bottom:10px;"><span style="width:6px;height:6px;background:#24CA68;border-radius:50%;"></span> GGPIXAPI</div>'
     + '<h3 id="ggpix-titulo" style="margin:0 0 4px;font-size:18px;font-weight:700;color:#1a1a1a;">Gerando seu PIX...</h3>'
     + '<p id="ggpix-valor" style="margin:0;font-size:13px;color:#666;"></p>'
     + '</div>'
@@ -31,24 +31,6 @@
 
   document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-  // Captura UTMs da URL e sessionStorage
-  function getUTMs() {
-    var params = new URLSearchParams(window.location.search);
-    var tracking = {};
-    try { tracking = JSON.parse(sessionStorage.getItem('tracking') || '{}'); } catch(e) {}
-
-    return {
-      utm_source:   params.get('utm_source')   || tracking.utm_source   || null,
-      utm_medium:   params.get('utm_medium')   || tracking.utm_medium   || null,
-      utm_campaign: params.get('utm_campaign') || tracking.utm_campaign || null,
-      utm_content:  params.get('utm_content')  || tracking.utm_content  || null,
-      utm_term:     params.get('utm_term')     || tracking.utm_term     || null,
-      src:          params.get('src')          || tracking.src          || null,
-      sck:          params.get('sck') || params.get('ttclid') || tracking.sck || null,
-      client_user_agent: navigator.userAgent
-    };
-  }
-
   window.ggpixAbrirModal = function (amountCents, labelValor) {
     var modal   = document.getElementById('ggpix-modal');
     var loading = document.getElementById('ggpix-loading');
@@ -65,12 +47,10 @@
     modal.style.display   = 'flex';
     document.body.style.overflow = 'hidden';
 
-    var utms = getUTMs();
-
     fetch('https://pix-backend-4c35.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amountCents: amountCents, tracking: utms })
+      body: JSON.stringify({ amountCents: amountCents })
     })
     .then(function (res) { return res.json(); })
     .then(function (data) {
