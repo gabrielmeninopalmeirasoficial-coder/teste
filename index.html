@@ -1837,33 +1837,6 @@ input:checked + .slider:before {
     document.head.appendChild(a);
     </script>
     -->
-    
-    <!-- Analy Easy Code (se existir) -->
-    
-    <!-- UTMify Pixel Script - DEVE SER O PRIMEIRO SCRIPT -->
-    <script>
-      // Salva UTMs da URL IMEDIATAMENTE antes de qualquer coisa
-      (function() {
-        try {
-          var urlParams = new URLSearchParams(window.location.search);
-          var utmData = {
-            utm_source: urlParams.get('utm_source'),
-            utm_medium: urlParams.get('utm_medium'),
-            utm_campaign: urlParams.get('utm_campaign'),
-            utm_content: urlParams.get('utm_content'),
-            utm_term: urlParams.get('utm_term'),
-            fbclid: urlParams.get('fbclid'),
-            gclid: urlParams.get('gclid')
-          };
-          // Salva no localStorage para persistir entre páginas
-          if (utmData.utm_source || utmData.utm_campaign || utmData.fbclid) {
-            localStorage.setItem('utmify_params', JSON.stringify(utmData));
-            console.log('[UTMify] Parâmetros salvos:', utmData);
-          }
-        } catch(e) { console.log('[UTMify] Erro ao salvar params:', e); }
-      })();
-      
-      // Carrega o pixel UTMify
      <!-- TikTok Pixel Code Start -->
 <script>
 !function (w, d, t) {
